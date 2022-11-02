@@ -90,7 +90,7 @@ class AppLabelTextField extends StatelessWidget {
                 const BoxConstraints(maxHeight: 32, maxWidth: 32),
             counterText: "",
           ),
-          cursorColor: AppColors.textFieldCursor,
+          cursorColor: AppColors.primary,
           keyboardType: textInputType,
           inputFormatters: inputFormatters,
         ),

@@ -105,7 +105,7 @@ class AppLabelDatePicker extends StatelessWidget {
                   suffixIconConstraints:
                       const BoxConstraints(maxHeight: 32, maxWidth: 32),
                 ),
-                cursorColor: AppColors.textFieldCursor,
+                cursorColor: AppColors.primary,
               ),
             );
           },

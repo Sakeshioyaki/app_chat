@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_dimens.dart';
-import 'package:flutter_base/models/enums/movie_category.dart';
-import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
-
-import 'movies/movies_page.dart';
-import 'widgets/home_app_bar.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_images.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/ui/pages/chat/chat_page.dart';
+import 'package:flutter_base/ui/pages/contacts/contacts_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,13 +16,28 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   @override
   bool get wantKeepAlive => true;
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  late TabController _tapBarController;
+  static const List<Widget> _widgetOptions = [
+    ContactsPage(),
+    ChatPage(),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    _tapBarController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -35,43 +49,179 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: HomeAppBar(
-          //Todo
-          // avatarUrl: authService.user.value?.avatarUrl ?? "",
-          ),
+      appBar: _selectedIndex == 0
+          ? buildAppBarContact()
+          : (_selectedIndex == 1 ? buildAppBarChat() : buildAppBarMore()),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(AppDimens.paddingNormal),
-              child: AppTabBar(
-                tabController: _tapBarController,
-                tabItems: const [
-                  "Trending",
-                  "Upcoming",
-                ],
-              ),
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.textWhite,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              AppImages.icContacts,
+              width: 27,
             ),
-            Expanded(
-              child: TabBarView(
-                controller: _tapBarController,
+            label: 'Contacts',
+            activeIcon: Column(
+              children: [
+                Text('Contacts', style: AppTextStyle.blackS14),
+                const SizedBox(height: 6),
+                Container(
+                  height: 4,
+                  width: 4,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(2)),
+                ),
+              ],
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              AppImages.icChats,
+              width: 24,
+            ),
+            label: 'Chats',
+            activeIcon: Column(
+              children: [
+                Text('Chats', style: AppTextStyle.blackS14),
+                const SizedBox(height: 6),
+                Container(
+                  height: 4,
+                  width: 4,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(2)),
+                ),
+              ],
+            ),
+          ),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                AppImages.icMore,
+                width: 21,
+              ),
+              label: 'More',
+              activeIcon: Column(
                 children: [
-                  _buildTrendingMovies(),
-                  _buildUpcomingMovies(),
+                  Text('More', style: AppTextStyle.blackS14),
+                  const SizedBox(height: 6),
+                  Container(
+                    height: 4,
+                    width: 4,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(2)),
+                  ),
                 ],
-              ),
-            ),
-          ],
-        ),
+              )),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }
 
-  Widget _buildTrendingMovies() {
-    return const MoviesPage(section: MovieCategory.trending);
+  PreferredSize buildAppBarMore() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(30.0), // here the desired height
+      child: AppBar(
+        leadingWidth: 80,
+        leading: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(left: 24),
+          child: Text(
+            'More',
+            style: AppTextStyle.blackS18Bold,
+          ),
+        ),
+        shadowColor: Colors.transparent,
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(2.0),
+            child: Container(
+              color: Colors.transparent,
+            )),
+      ),
+    );
   }
 
-  Widget _buildUpcomingMovies() {
-    return const MoviesPage(section: MovieCategory.upcoming);
+  PreferredSize buildAppBarChat() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(30.0), // here the desired height
+      child: AppBar(
+        leadingWidth: 80,
+        leading: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(left: 24),
+          child: Text(
+            'Chats',
+            style: AppTextStyle.blackS18Bold,
+          ),
+        ),
+        actions: [
+          Container(
+            padding: const EdgeInsets.only(right: 10),
+            alignment: Alignment.center,
+            child: Image.asset(
+              AppImages.icNewMessage,
+              width: 19,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(right: 24),
+            alignment: Alignment.center,
+            child: Image.asset(
+              AppImages.icListMessage,
+              width: 19,
+            ),
+          ),
+        ],
+        shadowColor: Colors.transparent,
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(2.0),
+            child: Container(
+              color: Colors.transparent,
+            )),
+      ),
+    );
+  }
+
+  PreferredSize buildAppBarContact() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(30.0), // here the desired height
+      child: AppBar(
+        leadingWidth: 110,
+        leading: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(left: 24),
+          child: Text(
+            'Contacts',
+            style: AppTextStyle.blackS18Bold,
+          ),
+        ),
+        actions: [
+          Container(
+            padding: const EdgeInsets.only(right: 24),
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.add,
+              size: 24,
+              color: Colors.black,
+            ),
+          )
+        ],
+        shadowColor: Colors.transparent,
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(2.0),
+            child: Container(
+              color: Colors.transparent,
+            )),
+      ),
+    );
   }
 }

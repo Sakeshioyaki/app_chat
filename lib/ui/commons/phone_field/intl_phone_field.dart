@@ -241,7 +241,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
             },
             maxLength:
                 widget.disableLengthCheck ? null : _selectedCountry.maxLength,
-            keyboardType: widget.keyboardType,
+            keyboardType: TextInputType.number,
             inputFormatters: widget.inputFormatters,
             enabled: widget.enabled,
             keyboardAppearance: widget.keyboardAppearance,

@@ -51,7 +51,7 @@ class SignInCubit extends Cubit<SignInState> {
         appCubit.updateProfile(myProfile);
         authRepo.saveToken(result);
         emit(state.copyWith(signInStatus: LoadStatus.success));
-        Get.offNamed(RouteConfig.main);
+        Get.offNamed(RouteConfig.home);
       } else {
         emit(state.copyWith(signInStatus: LoadStatus.failure));
       }

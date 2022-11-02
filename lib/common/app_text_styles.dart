@@ -6,7 +6,11 @@ class AppTextStyle {
   ///Black
   static const black = TextStyle(color: Colors.black);
 
-  //s12
+  //s10
+  static final blackS10 = black.copyWith(fontSize: 10);
+  static final blackS10Bold = blackS10.copyWith(fontWeight: FontWeight.bold);
+  static final blackS10W800 =
+      blackS10.copyWith(fontWeight: FontWeight.w800); //s12
   static final blackS12 = black.copyWith(fontSize: 12);
   static final blackS12Bold = blackS12.copyWith(fontWeight: FontWeight.bold);
   static final blackS12W800 = blackS12.copyWith(fontWeight: FontWeight.w800);
@@ -24,7 +28,7 @@ class AppTextStyle {
   static final blackS16W800 = blackS16.copyWith(fontWeight: FontWeight.w800);
 
   //s18
-  static final blackS18 = black.copyWith(fontSize: 14);
+  static final blackS18 = black.copyWith(fontSize: 18);
   static final blackS18Bold = blackS18.copyWith(fontWeight: FontWeight.bold);
   static final blackS18W800 = blackS18.copyWith(fontWeight: FontWeight.w800);
   //s24
@@ -79,25 +83,10 @@ class AppTextStyle {
   static final greyS18W800 = greyS18.copyWith(fontWeight: FontWeight.w800);
 
   ///Tint
-  static const tint = TextStyle(color: AppColors.secondary);
+  static const blue = TextStyle(color: AppColors.blue);
 
   //s12
-  static final tintS12 = tint.copyWith(fontSize: 12);
-  static final tintS12Bold = tintS12.copyWith(fontWeight: FontWeight.bold);
-  static final tintS12W800 = tintS12.copyWith(fontWeight: FontWeight.w800);
-
-  //s14
-  static final tintS14 = tint.copyWith(fontSize: 14);
-  static final tintS14Bold = tintS14.copyWith(fontWeight: FontWeight.bold);
-  static final tintS14W800 = tintS14.copyWith(fontWeight: FontWeight.w800);
-
-  //s16
-  static final tintS16 = tint.copyWith(fontSize: 16);
-  static final tintS16Bold = tintS16.copyWith(fontWeight: FontWeight.bold);
-  static final tintS16W800 = tintS16.copyWith(fontWeight: FontWeight.w800);
-
-  //s18
-  static final tintS18 = tint.copyWith(fontSize: 18);
-  static final tintS18Bold = tintS18.copyWith(fontWeight: FontWeight.bold);
-  static final tintS18W800 = tintS18.copyWith(fontWeight: FontWeight.w800);
+  static final blueS16 = blue.copyWith(fontSize: 16);
+  static final blueS16Bold = blueS16.copyWith(fontWeight: FontWeight.bold);
+  static final blueS16W800 = blueS16.copyWith(fontWeight: FontWeight.w800);
 }

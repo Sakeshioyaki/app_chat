@@ -10,15 +10,15 @@ class AppTintButton extends AppButton {
     bool isLoading = false,
     VoidCallback? onPressed,
   }) : super(
-          key: key,
-          title: title,
-          isLoading: isLoading,
-          onPressed: onPressed,
-          textStyle: const TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-          ),
-          backgroundColor: AppColors.blue,
-        );
+            key: key,
+            title: title,
+            isLoading: isLoading,
+            onPressed: onPressed,
+            textStyle: const TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+            backgroundColor: AppColors.blue,
+            cornerRadius: 30.0);
 }

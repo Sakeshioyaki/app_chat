@@ -31,8 +31,10 @@ class AppColors {
   static const Color textFieldEnabledBorder = Color(0xFF919191);
   static const Color textFieldFocusedBorder = Color(0xFFd74315);
   static const Color textFieldDisabledBorder = Color(0xFF919191);
-  static const Color textFieldCursor = Color(0xFF919191);
+  static const Color textFieldSearchBackground = Color(0xFFADB5BD);
+  static const Color grayBackground = Color(0xFFADB5BD);
   static const Color textFieldBackground = Color(0xFFF7F7FC);
+  static const Color violet = Color(0xFFD2D5F9);
 
   ///Button
   static const Color buttonBGWhite = Color(0xFFcdd0d5);
@@ -44,4 +46,8 @@ class AppColors {
 
   ///BottomNavigationBar
   static const Color bottomNavigationBar = Color(0xFF919191);
+
+  static const Color startGradient = Color(0xFFD2D5F9);
+  static const Color endGradient = Color(0xFF2C37E1);
+  static const Color onlineGreen = Color(0xFF2CC069);
 }

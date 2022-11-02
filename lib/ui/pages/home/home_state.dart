@@ -1,9 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class HomeState extends Equatable {
-  HomeState() {
-    ///Initialize variables
-  }
+  HomeState() {}
 
   @override
   List<Object?> get props => [];

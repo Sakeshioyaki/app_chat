@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/commons/phone_field/intl_phone_field.dart';
+import 'package:flutter_base/ui/pages/sign_in/input_code/input_code_page.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_base/ui/widgets/input/app_password_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../repositories/auth_repository.dart';
 import '../../../repositories/user_repository.dart';
@@ -68,52 +71,84 @@ class _SignInChildPageState extends State<SignInChildPage> {
   }
 
   Widget buildBodyWidget() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Enter Your Phone Number',
-          style: AppTextStyle.blackS24Bold,
-        ),
-        const SizedBox(height: 8),
-        SizedBox(
-          width: 295,
-          child: Text(
-            "Please confirm your country code and enter your phone number",
-            style: AppTextStyle.blackS14,
-            textAlign: TextAlign.center,
-            maxLines: 2,
+    return Scaffold(
+      appBar: AppBar(
+        leading: TextButton(
+          onPressed: () {
+            Navigator.of(context).pop;
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+            size: 12,
           ),
         ),
-        const SizedBox(height: 48),
-        Container(
-          height: 36,
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: IntlPhoneField(
-            dropdownTextStyle: AppTextStyle.greyS14,
-            showDropdownIcon: false,
-            decoration: InputDecoration(
-              hintText: 'Phone Number',
-              hintStyle: AppTextStyle.greyS14,
-              filled: true,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  borderSide: BorderSide.none),
-              fillColor: AppColors.textFieldBackground,
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 10,
+        shadowColor: Colors.transparent,
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(2.0),
+            child: Container(
+              color: Colors.transparent,
+            )),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          // reverse: true,
+          padding: const EdgeInsets.only(top: 80),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Enter Your Phone Number',
+                style: AppTextStyle.blackS24Bold,
               ),
-            ),
-            initialCountryCode: 'VN',
-            disableLengthCheck: true,
-            onChanged: (phone) {
-              print(phone.completeNumber);
-            },
+              const SizedBox(height: 8),
+              SizedBox(
+                width: 295,
+                child: Text(
+                  "Please confirm your country code and enter your phone number",
+                  style: AppTextStyle.blackS14,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                ),
+              ),
+              const SizedBox(height: 48),
+              Container(
+                height: 36,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: IntlPhoneField(
+                  dropdownTextStyle: AppTextStyle.greyS14,
+                  showDropdownIcon: false,
+                  decoration: InputDecoration(
+                    hintText: 'Phone Number',
+                    hintStyle: AppTextStyle.greyS14,
+                    filled: true,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: BorderSide.none),
+                    fillColor: AppColors.textFieldBackground,
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 10,
+                    ),
+                  ),
+                  initialCountryCode: 'VN',
+                  disableLengthCheck: true,
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
+                  keyboardType: TextInputType.number,
+                  // keyboardAppearance:,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 80),
+              _buildSignButton(),
+            ],
           ),
         ),
-        _buildSignButton(),
-      ],
+      ),
     );
   }
 
@@ -124,7 +159,9 @@ class _SignInChildPageState extends State<SignInChildPage> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: AppTintButton(
             title: 'Continue',
-            onPressed: _signIn,
+            onPressed: () {
+              Get.to(() => InputCodePage());
+            },
             isLoading: state.signInStatus == LoadStatus.loading,
           ),
         );
