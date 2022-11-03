@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/ui/pages/home/home_page.dart';
+import 'package:flutter_base/ui/pages/sign_in/input_name/input_name_page.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -89,16 +89,17 @@ class _InputCodePageState extends State<InputCodePage> {
                     },
                     onCompleted: (String value) {
                       print("this is ${value}");
-                      Get.to(() => HomePage());
+                      Get.to(() => ProfilePage());
                     }),
               ),
               const SizedBox(height: 60),
               TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Resend Code',
-                    style: AppTextStyle.blueS16,
-                  ))
+                onPressed: () {},
+                child: Text(
+                  'Resend Code',
+                  style: AppTextStyle.blueS16,
+                ),
+              ),
             ],
           ),
         ),

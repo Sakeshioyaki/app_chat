@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/ui/messages/message_page.dart';
 import 'package:flutter_base/ui/widgets/gradien_container/gradien_container.dart';
+import 'package:get/get.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -90,6 +92,7 @@ class _ChatPageState extends State<ChatPage> {
           return GestureDetector(
             onTap: () {
               print('see chat');
+              Get.to(() => MessagePage());
             },
             child: buildContactItem(index),
           );
@@ -102,29 +105,37 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          buildAvatar(),
-          const SizedBox(width: 12),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                'Athalia Putri',
-                style: AppTextStyle.blackS14SemiBold,
+              buildAvatar(),
+              const SizedBox(width: 12),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Athalia Putri',
+                    style: AppTextStyle.blackS14SemiBold,
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    'Good morning, did you sleep well?',
+                    style: AppTextStyle.greyS12,
+                  )
+                ],
               ),
-              const SizedBox(height: 5),
-              Text(
-                'Good morning, did you sleep well?',
-                style: AppTextStyle.greyS12,
-              )
             ],
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('Today'),
+              Text(
+                'Today',
+                style: AppTextStyle.greyS10,
+              ),
+              const SizedBox(height: 10),
               Container(
                 width: 20,
                 height: 20,
@@ -135,7 +146,7 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 child: Text(
                   '1',
-                  style: AppTextStyle.blackS10,
+                  style: AppTextStyle.blueS10Bold,
                 ),
               )
             ],
@@ -268,7 +279,7 @@ class _ChatPageState extends State<ChatPage> {
             height: 56,
             width: 56,
             child: GradientOutline(
-              strokeWidth: 3,
+              strokeWidth: 2,
               radius: 18,
               gradient: const LinearGradient(
                 colors: [AppColors.grayBackground, AppColors.grayBackground],

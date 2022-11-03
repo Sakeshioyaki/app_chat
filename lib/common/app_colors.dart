@@ -36,6 +36,9 @@ class AppColors {
   static const Color textFieldBackground = Color(0xFFF7F7FC);
   static const Color violet = Color(0xFFD2D5F9);
 
+  ///TextGray
+  static const Color gray = Color(0xFFA4A4A4);
+
   ///Button
   static const Color buttonBGWhite = Color(0xFFcdd0d5);
   static const Color buttonBGTint = secondary;

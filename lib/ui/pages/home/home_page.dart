@@ -4,6 +4,7 @@ import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/ui/pages/chat/chat_page.dart';
 import 'package:flutter_base/ui/pages/contacts/contacts_page.dart';
+import 'package:flutter_base/ui/pages/more/more_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,10 +24,7 @@ class _HomePageState extends State<HomePage>
   static const List<Widget> _widgetOptions = [
     ContactsPage(),
     ChatPage(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    MorePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -131,7 +129,7 @@ class _HomePageState extends State<HomePage>
     return PreferredSize(
       preferredSize: const Size.fromHeight(30.0), // here the desired height
       child: AppBar(
-        leadingWidth: 80,
+        leadingWidth: 70,
         leading: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.only(left: 24),

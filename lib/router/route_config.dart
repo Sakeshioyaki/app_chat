@@ -1,6 +1,8 @@
+import 'package:flutter_base/ui/messages/message_page.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/intro/intro_page.dart';
 import 'package:flutter_base/ui/pages/sign_in/input_code/input_code_page.dart';
+import 'package:flutter_base/ui/pages/sign_in/input_name/input_name_page.dart';
 import 'package:flutter_base/ui/pages/sign_in/sign_in_page.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +17,8 @@ class RouteConfig {
   static const String signIn = "/signIn";
   static const String inputCode = "/inputCode";
   static const String home = "/home";
+  static const String message = "/message";
+  static const String profilePage = "/ProfilePage";
 
   ///Alias ​​mapping page
   static final List<GetPage> getPages = [
@@ -23,5 +27,7 @@ class RouteConfig {
     GetPage(name: intro, page: () => const IntroPage()),
     GetPage(name: signIn, page: () => const SignInPage()),
     GetPage(name: inputCode, page: () => const InputCodePage()),
+    GetPage(name: message, page: () => const MessagePage()),
+    GetPage(name: profilePage, page: () => const ProfilePage()),
   ];
 }

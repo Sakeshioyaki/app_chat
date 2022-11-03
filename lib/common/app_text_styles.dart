@@ -39,6 +39,10 @@ class AppTextStyle {
   ///White
   static const white = TextStyle(color: Colors.white);
 
+  //s10
+  static final whiteS10 = white.copyWith(fontSize: 10);
+  static final whiteS10Bold = whiteS10.copyWith(fontWeight: FontWeight.bold);
+  static final whiteS10W800 = whiteS10.copyWith(fontWeight: FontWeight.w800);
   //s12
   static final whiteS12 = white.copyWith(fontSize: 12);
   static final whiteS12Bold = whiteS12.copyWith(fontWeight: FontWeight.bold);
@@ -60,8 +64,12 @@ class AppTextStyle {
   static final whiteS18W800 = whiteS18.copyWith(fontWeight: FontWeight.w800);
 
   ///Gray
-  static const grey = TextStyle(color: Colors.grey);
+  static const grey = TextStyle(color: AppColors.gray);
 
+  //s10
+  static final greyS10 = grey.copyWith(fontSize: 10);
+  static final greyS10Bold = greyS10.copyWith(fontWeight: FontWeight.bold);
+  static final greyS10W800 = greyS10.copyWith(fontWeight: FontWeight.w800);
   //s12
   static final greyS12 = grey.copyWith(fontSize: 12);
   static final greyS12Bold = greyS12.copyWith(fontWeight: FontWeight.bold);
@@ -85,6 +93,10 @@ class AppTextStyle {
   ///Tint
   static const blue = TextStyle(color: AppColors.blue);
 
+  //s10
+  static final blueS10 = blue.copyWith(fontSize: 10);
+  static final blueS10Bold = blueS10.copyWith(fontWeight: FontWeight.bold);
+  static final blueS10W800 = blueS10.copyWith(fontWeight: FontWeight.w800);
   //s12
   static final blueS16 = blue.copyWith(fontSize: 16);
   static final blueS16Bold = blueS16.copyWith(fontWeight: FontWeight.bold);
