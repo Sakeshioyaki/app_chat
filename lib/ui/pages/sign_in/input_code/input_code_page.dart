@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/ui/pages/sign_in/input_name/input_name_page.dart';
-import 'package:get/get.dart';
+import 'package:flutter_base/ui/pages/sign_in/input_code/input_code_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class InputCodePage extends StatefulWidget {
-  const InputCodePage({Key? key}) : super(key: key);
+  final String phone;
+  const InputCodePage({Key? key, required this.phone}) : super(key: key);
 
   @override
   State<InputCodePage> createState() => _InputCodePageState();
@@ -13,6 +14,14 @@ class InputCodePage extends StatefulWidget {
 
 class _InputCodePageState extends State<InputCodePage> {
   TextEditingController textCtrl = TextEditingController();
+  late InputCodeCubit cubit;
+
+  @override
+  void initState() {
+    cubit = BlocProvider.of<InputCodeCubit>(context);
+    super.initState();
+    cubit.verifyPhone(phone: widget.phone);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,38 +68,41 @@ class _InputCodePageState extends State<InputCodePage> {
               const SizedBox(height: 48),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 35),
-                child: PinCodeTextField(
-                    appContext: context,
-                    length: 4,
-                    blinkWhenObscuring: false,
-                    animationType: AnimationType.fade,
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.circle,
-                      borderWidth: 1.5,
-                      activeFillColor: Colors.transparent,
-                      activeColor: Colors.transparent,
-                      selectedFillColor: Colors.transparent,
-                      selectedColor: Colors.transparent,
-                      inactiveColor: Colors.transparent,
-                      inactiveFillColor: Colors.grey,
-                      fieldOuterPadding: EdgeInsets.zero,
-                    ),
-                    textStyle: const TextStyle(fontSize: 30),
-                    cursorColor: Colors.black,
-                    cursorHeight: 20,
-                    animationDuration: const Duration(milliseconds: 200),
-                    enableActiveFill: true,
-                    controller: textCtrl,
-                    autoDisposeControllers: false,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    keyboardType: TextInputType.number,
-                    onChanged: (String value) {
-                      print(value);
-                    },
-                    onCompleted: (String value) {
-                      print("this is ${value}");
-                      Get.to(() => ProfilePage());
-                    }),
+                child: BlocBuilder<InputCodeCubit, InputCodeState>(
+                    builder: (context, state) {
+                  return PinCodeTextField(
+                      appContext: context,
+                      length: 4,
+                      blinkWhenObscuring: false,
+                      animationType: AnimationType.fade,
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.circle,
+                        borderWidth: 1.5,
+                        activeFillColor: Colors.transparent,
+                        activeColor: Colors.transparent,
+                        selectedFillColor: Colors.transparent,
+                        selectedColor: Colors.transparent,
+                        inactiveColor: Colors.transparent,
+                        inactiveFillColor: Colors.grey,
+                        fieldOuterPadding: EdgeInsets.zero,
+                      ),
+                      textStyle: const TextStyle(fontSize: 30),
+                      cursorColor: Colors.black,
+                      cursorHeight: 20,
+                      animationDuration: const Duration(milliseconds: 200),
+                      enableActiveFill: true,
+                      controller: textCtrl,
+                      autoDisposeControllers: false,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      keyboardType: TextInputType.number,
+                      onChanged: (String value) {
+                        print(value);
+                        cubit.enterCode(code: value);
+                      },
+                      onCompleted: (String pin) async {
+                        cubit.SignIn(pin);
+                      });
+                }),
               ),
               const SizedBox(height: 60),
               TextButton(

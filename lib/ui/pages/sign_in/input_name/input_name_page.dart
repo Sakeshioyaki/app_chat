@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/ui/pages/sign_in/input_code/input_code_page.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
-import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -155,7 +153,7 @@ Widget _buildSaveButton() {
     child: AppTintButton(
       title: 'Save',
       onPressed: () {
-        Get.to(() => InputCodePage());
+        // Get.to(() => InputCodePage());
       },
     ),
   );

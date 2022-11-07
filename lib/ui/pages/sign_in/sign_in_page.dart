@@ -7,7 +7,6 @@ import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/commons/phone_field/intl_phone_field.dart';
 import 'package:flutter_base/ui/pages/sign_in/input_code/input_code_page.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
-import 'package:flutter_base/ui/widgets/input/app_password_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
@@ -44,22 +43,17 @@ class SignInChildPage extends StatefulWidget {
 }
 
 class _SignInChildPageState extends State<SignInChildPage> {
-  late TextEditingController usernameTextController;
-  late TextEditingController passwordTextController;
-
-  late ObscureTextController obscurePasswordController;
+  late TextEditingController phoneTextController;
 
   late SignInCubit _cubit;
 
   @override
   void initState() {
     super.initState();
-    usernameTextController = TextEditingController(text: 'mobile@newwave.com');
-    passwordTextController = TextEditingController(text: "mobile");
-    obscurePasswordController = ObscureTextController(obscureText: true);
+    phoneTextController = TextEditingController(text: '962150299');
+
     _cubit = BlocProvider.of<SignInCubit>(context);
-    _cubit.changeUsername(username: usernameTextController.text);
-    _cubit.changePassword(password: passwordTextController.text);
+    _cubit.changePhone(phone: phoneTextController.text);
   }
 
   @override
@@ -160,16 +154,13 @@ class _SignInChildPageState extends State<SignInChildPage> {
           child: AppTintButton(
             title: 'Continue',
             onPressed: () {
-              Get.to(() => InputCodePage());
+              Get.toNamed("/inputCode/:${state.phone}");
+              Get.to(() => InputCodePage(phone: state.phone ?? '0962150299'));
             },
             isLoading: state.signInStatus == LoadStatus.loading,
           ),
         );
       },
     );
-  }
-
-  void _signIn() {
-    _cubit.signIn();
   }
 }

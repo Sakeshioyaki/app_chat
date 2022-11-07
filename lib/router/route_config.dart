@@ -15,7 +15,7 @@ class RouteConfig {
   static const String splash = "/splash";
   static const String intro = "/intro";
   static const String signIn = "/signIn";
-  static const String inputCode = "/inputCode";
+  static const String inputCode = "/inputCode/:phone";
   static const String home = "/home";
   static const String message = "/message";
   static const String profilePage = "/ProfilePage";
@@ -26,7 +26,7 @@ class RouteConfig {
     GetPage(name: home, page: () => const HomePage()),
     GetPage(name: intro, page: () => const IntroPage()),
     GetPage(name: signIn, page: () => const SignInPage()),
-    GetPage(name: inputCode, page: () => const InputCodePage()),
+    GetPage(name: inputCode, page: () => InputCodePage(phone: Get.arguments)),
     GetPage(name: message, page: () => const MessagePage()),
     GetPage(name: profilePage, page: () => const ProfilePage()),
   ];

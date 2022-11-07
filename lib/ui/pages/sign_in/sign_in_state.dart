@@ -2,31 +2,28 @@ part of 'sign_in_cubit.dart';
 
 class SignInState extends Equatable {
   final LoadStatus signInStatus;
-  final String? username;
-  final String? password;
+  final String? phone;
 
   const SignInState({
     this.signInStatus = LoadStatus.initial,
-    this.username,
-    this.password,
+    this.phone,
   });
 
   @override
   List<Object?> get props => [
         signInStatus,
-        username,
-        password,
+        phone,
       ];
 
   SignInState copyWith({
     LoadStatus? signInStatus,
-    String? username,
-    String? password,
+    String? firstName,
+    String? phone,
+    String? lastName,
   }) {
     return SignInState(
       signInStatus: signInStatus ?? this.signInStatus,
-      username: username ?? this.username,
-      password: password ?? this.password,
+      phone: phone ?? this.phone,
     );
   }
 }
